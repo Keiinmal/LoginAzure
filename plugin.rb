@@ -263,8 +263,10 @@ class ::OAuth2BasicAuthenticator < Auth::ManagedAuthenticator
       if fetched_user_details = fetch_user_details(auth['credentials']['token'], auth['uid'])
         auth['uid'] = fetched_user_details[:user_id] if fetched_user_details[:user_id]
         
-        temp_email = fetched_user_details[:email]
-        auth['info']['nickname'] = temp_email.split('@')[0] if fetched_user_details[:email] # Edited!!!!!!
+        #temp_email = fetched_user_details[:email]
+        #auth['info']['nickname'] = temp_email.split('@')[0] if fetched_user_details[:email] # Edited!!!!!!
+        
+        auth['info']['nickname'] = fetched_user_details[:username] if fetched_user_details[:username]
         
         auth['info']['image'] = fetched_user_details[:avatar] if fetched_user_details[:avatar]
         ['name', 'email', 'email_verified'].each do |property|
